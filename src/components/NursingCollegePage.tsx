@@ -21,6 +21,7 @@ import {
   Building2,
   FileText,
   Clock,
+  PlayCircle,
   HeartPulse,
   BadgeAlert,
   ChevronRight,
@@ -36,11 +37,6 @@ import {
   ArrowLeft,
   Briefcase,
   Menu,
-  Play,
-  Pause,
-  Volume2,
-  VolumeX,
-  Maximize,
   ShieldCheck,
   Award as AwardIcon
 } from 'lucide-react';
@@ -58,11 +54,6 @@ export default function NursingCollegePage({ onBackToHospital }: CollegePageProp
   const [prospectusForm, setProspectusForm] = useState({ name: '', email: '', phone: '', course: 'anm' });
   const [prospectusSuccess, setProspectusSuccess] = useState(false);
   const [activeFacilityIndex, setActiveFacilityIndex] = useState(0);
-
-  // Dedicated States & Refs for the Real Examination Hall Video Section
-  const [isExamVideoPlaying, setIsExamVideoPlaying] = useState(false);
-  const [isExamVideoMuted, setIsExamVideoMuted] = useState(false);
-  const examVideoRef = React.useRef<HTMLVideoElement>(null);
 
   // Filter Category State for Premium Faculty Section
   const [facultyCategory, setFacultyCategory] = useState<'all' | 'leadership' | 'nursing' | 'visiting'>('all');
@@ -314,6 +305,33 @@ export default function NursingCollegePage({ onBackToHospital }: CollegePageProp
     }
   ];
 
+  const clinicalLearningVideos = [
+    {
+      title: 'Practical Nursing Training',
+      description: 'Students build core bedside skills through supervised demonstrations, hands-on procedures, and faculty-guided practice.',
+      duration: '4:32',
+      category: 'Practical Training',
+      src: '/videos/examination-hall-1.mp4',
+      gradient: 'from-purple-600 via-indigo-600 to-blue-600'
+    },
+    {
+      title: 'Viva Examination Session',
+      description: 'A focused look at viva-style evaluation where students explain nursing concepts, clinical reasoning, and patient-care steps.',
+      duration: '3:18',
+      category: 'Viva Session',
+      src: '/videos/examination-hall-2.mp4',
+      gradient: 'from-blue-600 via-cyan-500 to-purple-600'
+    },
+    {
+      title: 'Clinical Learning Experience',
+      description: 'Hospital-attached learning moments that help students connect classroom knowledge with real healthcare environments.',
+      duration: '5:06',
+      category: 'Clinical Exposure',
+      src: '/videos/exam3.mp4',
+      gradient: 'from-pink-500 via-purple-600 to-indigo-600'
+    }
+  ];
+
   const checkEligibility = (e: React.FormEvent) => {
     e.preventDefault();
     
@@ -374,40 +392,6 @@ export default function NursingCollegePage({ onBackToHospital }: CollegePageProp
       setIsProspectusOpen(false);
       setProspectusForm({ name: '', email: '', phone: '', course: 'anm' });
     }, 3000);
-  };
-
-  const handleExamVideoPlayPause = () => {
-    if (examVideoRef.current) {
-      if (isExamVideoPlaying) {
-        examVideoRef.current.pause();
-        setIsExamVideoPlaying(false);
-      } else {
-        examVideoRef.current.play().then(() => {
-          setIsExamVideoPlaying(true);
-        }).catch(err => {
-          console.error("Video play failed:", err);
-        });
-      }
-    }
-  };
-
-  const handleExamVideoMuteToggle = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    if (examVideoRef.current) {
-      examVideoRef.current.muted = !examVideoRef.current.muted;
-      setIsExamVideoMuted(examVideoRef.current.muted);
-    }
-  };
-
-  const handleExamVideoFullscreen = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    if (examVideoRef.current) {
-      if (examVideoRef.current.requestFullscreen) {
-        examVideoRef.current.requestFullscreen();
-      } else if ((examVideoRef.current as any).webkitRequestFullscreen) {
-        (examVideoRef.current as any).webkitRequestFullscreen();
-      }
-    }
   };
 
   const faqs = [
@@ -1816,9 +1800,9 @@ export default function NursingCollegePage({ onBackToHospital }: CollegePageProp
                 transition={{ delay: 0.1 }}
                 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 tracking-tight font-heading leading-tight uppercase"
               >
-                Campus Life & <br className="hidden sm:inline" />
+                Clinical Learning <br className="hidden sm:inline" />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0c4ea3] to-[#702082]">
-                  Academic Excellence
+                  In Action
                 </span>
               </motion.h2>
 
@@ -1829,212 +1813,94 @@ export default function NursingCollegePage({ onBackToHospital }: CollegePageProp
                 transition={{ delay: 0.2 }}
                 className="text-slate-500 text-sm md:text-base leading-relaxed max-w-2xl mx-auto font-medium"
               >
-                Experience a structured learning environment designed to prepare future healthcare professionals. We prepare students for strict examination protocols, national nursing standards, and disciplined clinical bedside behavior.
+                Explore real practical training, viva examinations and hospital-based learning experiences.
               </motion.p>
             </div>
 
-            {/* Split Layout: Video Centerpiece left, key highlights right */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-stretch">
-              
-              {/* LEFT SIDE: Premium Examination Hall Video Showcase */}
-              <motion.div 
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ type: "spring", stiffness: 100, damping: 20 }}
-                className="lg:col-span-6 flex flex-col justify-center"
+            <div className="relative overflow-hidden rounded-[2.5rem] border border-white/70 bg-gradient-to-br from-purple-50/90 via-white to-pink-50/90 p-5 shadow-[0_30px_90px_rgba(76,29,149,0.14)] sm:p-8 lg:p-10">
+              <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-purple-600 via-blue-500 to-pink-500" />
+              <motion.div
+                initial={{ opacity: 0, y: 18 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.35 }}
+                className="mx-auto mb-10 max-w-4xl text-center"
               >
-                {/* Glassmorphic Frame Wrapper */}
-                <div className="relative rounded-[2.8rem] bg-white/70 backdrop-blur-md p-4 border border-slate-200/80 shadow-2xl flex-1 flex flex-col justify-between overflow-hidden group">
-                  
-                  {/* Real-time security stream header panel */}
-                  <div className="flex items-center justify-between border-b border-slate-100 pb-3.5 mb-4 px-2 select-none">
-                    <div className="flex items-center gap-2">
-                      <span className="w-2.5 h-2.5 rounded-full bg-red-650 animate-ping" />
-                      <span className="text-[10px] font-black uppercase text-red-700 tracking-widest font-mono">CCTV EXAM STREAM_</span>
-                    </div>
-                    <div className="text-[9.5px] font-semibold text-slate-400 font-mono">
-                      SECURED BY KAIMUR EXAM BOARD
-                    </div>
-                  </div>
-
-                  {/* Main Video element container */}
-                  <div className="relative aspect-video rounded-[1.8rem] overflow-hidden bg-slate-950 border border-slate-200/40 group shadow-inner">
-                    
-                    <video 
-                      ref={examVideoRef}
-                      src="https://player.vimeo.com/external/459389137.hd.mp4?s=87af39cc2041cc25e17da14ec32dcc5f458e0fb4&profile_id=170&oauth2_token_id=57447761"
-                      className="w-full h-full object-cover transition-transform duration-500"
-                      loop
-                      playsInline
-                      onClick={handleExamVideoPlayPause}
-                    />
-
-                    {/* Pre-play Video Thumbnail & Watch Experience Overlay */}
-                    <AnimatePresence>
-                      {!isExamVideoPlaying && (
-                        <motion.div 
-                          initial={{ opacity: 1 }}
-                          exit={{ opacity: 0 }}
-                          className="absolute inset-0 bg-slate-950/40 backdrop-blur-xs flex flex-col items-center justify-center p-6 text-center cursor-pointer select-none"
-                          onClick={handleExamVideoPlayPause}
-                        >
-                          {/* Pulsating premium play trigger button */}
-                          <div className="relative mb-5 group-hover:scale-105 transition-transform duration-300">
-                            <span className="absolute inset-0 rounded-full bg-indigo-500/30 filter blur-md animate-ping" />
-                            <div className="w-16 h-16 rounded-full bg-gradient-to-tr from-indigo-600 to-purple-650 text-white flex items-center justify-center shadow-lg border border-white/20">
-                              <Play className="w-7 h-7 fill-white translate-x-0.5" />
-                            </div>
-                          </div>
-
-                          <span className="px-3.5 py-1 rounded-full bg-slate-950/70 border border-white/10 text-white text-[9px] font-black tracking-widest uppercase font-mono">
-                            Watch Campus Experience
-                          </span>
-                          <h4 className="text-white text-base md:text-lg font-black font-heading tracking-tight mt-2.5">
-                            Real Examination Hall Practice
-                          </h4>
-                          <p className="text-slate-300 text-[10.5px] max-w-xs mt-1 leading-normal font-light">
-                            Observe our disciplined testing systems and serious testing environments first-hand.
-                          </p>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-
-                    {/* Quick action triggers overlaying on top of video when playing */}
-                    {isExamVideoPlaying && (
-                      <div className="absolute bottom-4 left-4 right-4 bg-slate-950/75 backdrop-blur-md border border-white/15 px-4 py-2.5 rounded-xl flex items-center justify-between opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-25">
-                        <div className="flex items-center gap-3">
-                          <button 
-                            onClick={handleExamVideoPlayPause} 
-                            className="w-8 h-8 rounded-lg bg-white/15 text-white flex items-center justify-center hover:bg-white/25 active:scale-95 transition-all outline-none cursor-pointer"
-                          >
-                            <Pause className="w-4 h-4 fill-white" />
-                          </button>
-                          
-                          <button 
-                            onClick={handleExamVideoMuteToggle} 
-                            className="w-8 h-8 rounded-lg bg-white/15 text-white flex items-center justify-center hover:bg-white/25 active:scale-95 transition-all outline-none cursor-pointer"
-                          >
-                            {isExamVideoMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
-                          </button>
-                        </div>
-
-                        <span className="text-[9px] font-extrabold text-indigo-350 tracking-wider font-mono">
-                          LIVE ASSESSMENTS RUNNING
-                        </span>
-
-                        <button 
-                          onClick={handleExamVideoFullscreen} 
-                          className="w-8 h-8 rounded-lg bg-white/15 text-white flex items-center justify-center hover:bg-white/25 active:scale-95 transition-all outline-none cursor-pointer"
-                        >
-                          <Maximize className="w-4 h-4" />
-                        </button>
-                      </div>
-                    )}
-
-                  </div>
-
-                  {/* Footnote on clinical honesty */}
-                  <div className="pt-4 mt-4 border-t border-slate-100 flex items-center justify-between text-[11px] font-black text-slate-500 font-mono px-2">
-                    <span>REGULATED EXAMS PROTOCOL</span>
-                    <span className="text-indigo-650 flex items-center gap-1">
-                      <ShieldCheck className="w-3.5 h-3.5" /> VERIFIED GENUINE
-                    </span>
-                  </div>
-
-                </div>
-              </motion.div>
-
-              {/* RIGHT SIDE: Information architecture and key student highlights */}
-              <motion.div 
-                initial={{ opacity: 0, x: 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ type: "spring", stiffness: 100, damping: 20 }}
-                className="lg:col-span-6 flex flex-col justify-between space-y-8"
-              >
-                
-                {/* Introduction & Highlights Header */}
-                <div className="space-y-4">
-                  <h3 className="text-xl sm:text-2xl font-black font-heading text-slate-900 uppercase">
-                    Institution Integrity Frameworks
-                  </h3>
-                  <p className="text-slate-550 text-xs sm:text-sm leading-relaxed">
-                    We maintain absolute discipline across courses. Parents can rest easy knowing that our faculty, exam environments, and classroom standards strictly ensure students stay concentrated on learning and real patient treatment protocols.
-                  </p>
-                </div>
-
-                {/* Grid of the 6 core features requested */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="mb-5 flex flex-wrap items-center justify-center gap-2.5">
                   {[
-                    {
-                      label: "📚 Academic Discipline",
-                      desc: "Strict attendance logs, scheduled lecture plans, and regular assignments logging to ensure steady progress.",
-                      color: "border-indigo-100 bg-indigo-50/20 text-indigo-950"
-                    },
-                    {
-                      label: "📝 Examination Environment",
-                      desc: "Highly professional physical seating under strict certified proctored monitoring for clean assessments.",
-                      color: "border-blue-100 bg-blue-50/20 text-blue-955"
-                    },
-                    {
-                      label: "🏥 Hospital-Based Learning",
-                      desc: "Clinical practice directly inside Mata Bhagyamani Devi Hospital, bypassing dummy dependencies.",
-                      color: "border-pink-100 bg-pink-50/20 text-pink-950"
-                    },
-                    {
-                      label: "👩‍⚕️ Healthcare Training",
-                      desc: "Direct guidance by active consultant clinicians on pathology logging, emergency response codes, and nursing charts.",
-                      color: "border-emerald-100 bg-emerald-50/20 text-emerald-950"
-                    },
-                    {
-                      label: "🎓 Career-Oriented Education",
-                      desc: "One-on-one Indian Nursing Council test preparation and priority grooming for quick private medical placements.",
-                      color: "border-purple-100 bg-purple-50/20 text-purple-955"
-                    },
-                    {
-                      label: "🤝 Student Development",
-                      desc: "Structured ethical classes, high-security hostels with strict night study laws, and personality coaching templates.",
-                      color: "border-slate-200 bg-slate-50 text-slate-950"
-                    }
-                  ].map((feat, fIdx) => (
-                    <motion.div 
-                      key={fIdx}
-                      whileHover={{ y: -3 }}
-                      className={`p-4 border rounded-2xl flex flex-col justify-between ${feat.color} shadow-xs`}
+                    'Hospital Attached Campus',
+                    'Practical Based Learning',
+                    'Clinical Exposure',
+                    'Experienced Faculty'
+                  ].map((badge) => (
+                    <span
+                      key={badge}
+                      className="inline-flex items-center gap-2 rounded-full border border-white/80 bg-white/70 px-3.5 py-2 text-[10px] font-black uppercase tracking-widest text-slate-700 shadow-sm backdrop-blur-md"
                     >
-                      <h4 className="text-xs font-black uppercase font-heading tracking-tight text-slate-900">
-                        {feat.label}
-                      </h4>
-                      <p className="text-[11px] leading-relaxed text-slate-650 mt-1.5 font-medium">
-                        {feat.desc}
-                      </p>
-                    </motion.div>
+                      <CheckCircle2 className="h-3.5 w-3.5 text-pink-600" />
+                      {badge}
+                    </span>
                   ))}
                 </div>
-
-                {/* List of 5 core Trust Indicators requested */}
-                <div className="bg-slate-50 border border-slate-200/60 rounded-3xl p-5 space-y-3">
-                  <h4 className="text-[10px] font-black text-indigo-700 uppercase tracking-widest block font-mono">
-                    Official Quality Benchmarks Checked & Secured
-                  </h4>
-                  <div className="flex flex-wrap gap-x-5 gap-y-2">
-                    {[
-                      '✓ Real Classroom Experience',
-                      '✓ Practical Learning',
-                      '✓ Professional Faculty',
-                      '✓ Structured Assessments',
-                      '✓ Healthcare Career Preparation'
-                    ].map((trust, tIdx) => (
-                      <div key={tIdx} className="flex items-center gap-1.5 text-xs text-slate-800 font-extrabold select-none">
-                        <span className="text-emerald-650 font-black">✓</span>
-                        <span>{trust.replace('✓ ', '')}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
+                <span className="text-[10px] font-black uppercase tracking-[0.28em] text-purple-700">
+                  Academic Videos
+                </span>
+                <h3 className="mt-3 text-3xl font-black uppercase leading-tight tracking-tight text-slate-950 font-heading sm:text-4xl lg:text-5xl">
+                  Clinical Learning In Action
+                </h3>
+                <p className="mx-auto mt-4 max-w-2xl text-sm font-semibold leading-relaxed text-slate-600 sm:text-base">
+                  Explore real practical training, viva examinations and hospital-based learning experiences.
+                </p>
               </motion.div>
+
+              <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+                {clinicalLearningVideos.map((video, videoIdx) => (
+                  <motion.article
+                    key={video.title}
+                    initial={{ opacity: 0, y: 28 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.25 }}
+                    transition={{ delay: videoIdx * 0.08, type: 'spring', stiffness: 120, damping: 18 }}
+                    whileHover={{ y: -10, scale: 1.02 }}
+                    className="group relative overflow-hidden rounded-[2rem] border border-white/75 bg-white/65 p-3 shadow-[0_24px_70px_rgba(59,7,100,0.14)] backdrop-blur-xl transition-shadow duration-300 hover:shadow-[0_34px_95px_rgba(168,85,247,0.28)]"
+                  >
+                    <div className={`absolute inset-x-5 top-5 h-24 rounded-full bg-gradient-to-r ${video.gradient} opacity-20 blur-2xl transition-opacity duration-300 group-hover:opacity-35`} />
+                    <div className="relative overflow-hidden rounded-[1.45rem] bg-slate-950 shadow-2xl">
+                      <video
+                        src={video.src}
+                        className="aspect-video w-full object-cover"
+                        controls
+                        preload="metadata"
+                        playsInline
+                      />
+                      <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-gradient-to-t from-slate-950/45 via-slate-950/5 to-transparent opacity-100 transition-opacity duration-300 group-hover:opacity-90">
+                        <div className={`grid h-16 w-16 place-items-center rounded-full bg-gradient-to-br ${video.gradient} text-white shadow-[0_18px_45px_rgba(15,23,42,0.35)] ring-4 ring-white/45 transition-transform duration-300 group-hover:scale-110`}>
+                          <PlayCircle className="h-8 w-8" />
+                        </div>
+                      </div>
+                      <div className="pointer-events-none absolute left-3 top-3 flex flex-wrap gap-2">
+                        <span className="rounded-full bg-white/90 px-3 py-1 text-[10px] font-black uppercase tracking-widest text-slate-800 shadow-sm backdrop-blur">
+                          {video.duration}
+                        </span>
+                        <span className={`rounded-full bg-gradient-to-r ${video.gradient} px-3 py-1 text-[10px] font-black uppercase tracking-widest text-white shadow-sm`}>
+                          {video.category}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="relative px-2 pb-3 pt-5">
+                      <h4 className="text-lg font-black text-slate-950 font-heading sm:text-xl">
+                        {video.title}
+                      </h4>
+                      <p className="mt-2 text-sm font-medium leading-relaxed text-slate-600">
+                        {video.description}
+                      </p>
+                      <div className="mt-5 flex items-center justify-between border-t border-slate-200/70 pt-4 text-[11px] font-black uppercase tracking-widest text-slate-500">
+                        <span>Admissions Showcase</span>
+                        <span className="text-purple-700">Real Learning</span>
+                      </div>
+                    </div>
+                  </motion.article>
+                ))}
+              </div>
 
             </div>
 
@@ -2083,7 +1949,7 @@ export default function NursingCollegePage({ onBackToHospital }: CollegePageProp
                   {
                     num: "4",
                     phase: "Examinations",
-                    desc: "CCTV monitored testing, timed paper writing, and practical clinical test rounds.",
+                    desc: "Structured viva practice, timed assessments, and practical clinical evaluation rounds.",
                     icon: "📝",
                     color: "bg-pink-50 border-pink-200 text-pink-700"
                   },
