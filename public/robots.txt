@@ -1,0 +1,19 @@
+# Mata Bhagyamani Devi Hospital & Ramdhari Singh Memorial Nursing College
+# Robots.txt Config - Authorized Search Indexing Directives
+
+User-agent: *
+Allow: /
+Allow: /index.html
+Allow: /assets/
+Allow: /?view=college
+
+# Disallow indexing of lock files or developer configurations
+Disallow: /package.json
+Disallow: /package-lock.json
+Disallow: /tsconfig.json
+Disallow: /vite.config.ts
+Disallow: /metadata.json
+Disallow: /src/
+
+# Link to XML Sitemap
+Sitemap: https://mata-bhagyamani.com/sitemap.xml

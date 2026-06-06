@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- 1. HOSPITAL HOMEPAGE -->
+  <url>
+    <loc>https://mata-bhagyamani.com/</loc>
+    <lastmod>2026-06-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- 2. HOSPITAL ABOUT SECTION -->
+  <url>
+    <loc>https://mata-bhagyamani.com/#about</loc>
+    <lastmod>2026-06-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 3. HOSPITAL DOCTORS / CONSULTANTS -->
+  <url>
+    <loc>https://mata-bhagyamani.com/#doctors</loc>
+    <lastmod>2026-06-06</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- 4. HOSPITAL DEPARTMENTS & SERVICES -->
+  <url>
+    <loc>https://mata-bhagyamani.com/#services</loc>
+    <lastmod>2026-06-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 5. EMERGENCY & TRAUMA CENTER -->
+  <url>
+    <loc>https://mata-bhagyamani.com/#trauma</loc>
+    <lastmod>2026-06-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- 6. AYUSHMAN BHARAT YOJANA (CASHLESS SATELLITE) -->
+  <url>
+    <loc>https://mata-bhagyamani.com/#ayushman</loc>
+    <lastmod>2026-06-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- 7. INFRASTRUCTURE & GALLERY -->
+  <url>
+    <loc>https://mata-bhagyamani.com/#gallery</loc>
+    <lastmod>2026-06-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- 8. HOSPITAL PHYSICAL CONTACTS & MAP -->
+  <url>
+    <loc>https://mata-bhagyamani.com/#contact</loc>
+    <lastmod>2026-06-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 9. NURSING COLLEGE HOMEPAGE PORTAL -->
+  <url>
+    <loc>https://mata-bhagyamani.com/?view=college</loc>
+    <lastmod>2026-06-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- 10. NURSING COLLEGE COURSES (ANM, GNM) -->
+  <url>
+    <loc>https://mata-bhagyamani.com/?view=college#courses</loc>
+    <lastmod>2026-06-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 11. NURSING COLLEGE ADMISSIONS DESK -->
+  <url>
+    <loc>https://mata-bhagyamani.com/?view=college#admissions</loc>
+    <lastmod>2026-06-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- 12. NURSING COLLEGE CAMPUS FACILITIES -->
+  <url>
+    <loc>https://mata-bhagyamani.com/?view=college#facilities</loc>
+    <lastmod>2026-06-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+</urlset>

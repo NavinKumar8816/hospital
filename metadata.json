@@ -1,0 +1,6 @@
+{
+  "name": "Mata Bhagyamani Devi Hospital",
+  "description": "Premium multi-speciality healthcare branding and clinical portal for Mata Bhagyamani Devi Hospital and Trauma Center, Sakari Mod, Kudra, Kaimur, Bihar.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
