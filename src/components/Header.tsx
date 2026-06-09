@@ -1,25 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
-import { 
-  Phone, 
-  ShieldAlert, 
-  Heart, 
-  Plus, 
-  Menu, 
-  X, 
-  MapPin, 
-  Award, 
-  Lock, 
-  BookOpen, 
-  Image as ImageIcon, 
-  ExternalLink, 
-  Check, 
+import {
+  BookOpen,
   CheckCircle,
-  Clock,
-  ArrowRight,
+  GraduationCap,
+  Heart,
+  Image as ImageIcon,
+  MapPin,
+  Menu,
   MessageSquare,
-  GraduationCap
+  Phone,
+  X
 } from 'lucide-react';
+import { AnimatePresence, motion } from 'motion/react';
+import { useEffect, useState } from 'react';
+import LanguageSwitcher from './LanguageSwitcher';
 
 interface HeaderProps {
   onNavigate: (sectionId: string) => void;
@@ -63,7 +56,6 @@ export default function Header({ onNavigate, activeSection }: HeaderProps) {
     { label: 'Departments', desktopLabel: 'Services', id: 'services' },
     { label: 'Trauma Center', desktopLabel: 'Trauma', id: 'trauma', badge: 'RED' },
     { label: 'Facilities', desktopLabel: 'Facilities', id: 'facilities' },
-    { label: 'Ayushman Bharat', desktopLabel: 'Ayushman', id: 'ayushman', badge: 'FREE' },
     { label: 'Gallery', desktopLabel: 'Gallery', id: 'gallery' },
     { label: 'Contact', desktopLabel: 'Contact', id: 'contact' },
   ];
@@ -222,45 +214,44 @@ export default function Header({ onNavigate, activeSection }: HeaderProps) {
           >
             <div className="flex items-center justify-between gap-3 xl:gap-4 animate-fade-in overflow-visible">
               
-              {/* LEFT SECTION: Premium Logo Area (Mother + Child + Medical Cross - Sized responsive) */}
-              <div 
-                id="nav-logo"
-                onClick={() => {
-                  onNavigate('overview');
-                  window.scrollTo({ top: 0, behavior: 'smooth' });
-                }}
-                className="flex items-center gap-2.5 md:gap-3 cursor-pointer group select-none ml-1 md:ml-0 shrink-0"
-              >
-                {/* Embedded Symbol Composition: Mother, Child, Medical Cross (Mobile-First 20% Slim size) */}
-                <div className="relative w-[38px] h-[38px] md:w-12 md:h-12 flex items-center justify-center rounded-xl md:rounded-2xl bg-gradient-to-tr from-[#1e40af] via-[#5b21b6] to-[#db2777] shadow-lg shadow-[#5b21b6]/20 transition-transform duration-500 group-hover:scale-105 shrink-0">
-                  <div className="absolute inset-0 bg-white/10 rounded-xl md:rounded-2xl filter blur-[1px]" />
-                  {/* Heart for motherly compassion */}
-                  <Heart className="w-5.5 h-5.5 md:w-7 md:h-7 text-[#ffe4e6] fill-[#ffe4e6]/10 absolute opacity-30 animate-pulse" />
-                  {/* Bold clinical plus for medicine */}
-                  <Plus className="w-3.5 h-3.5 md:w-5 md:h-5 text-white stroke-[3] relative z-10 translate-x-[-0.5px]" />
-                  {/* Emoji baby graphic overlay representing child */}
-                  <div className="absolute -bottom-0.5 -right-0.5 w-4.5 h-4.5 md:-bottom-1 md:-right-1 md:w-6 md:h-6 rounded-full bg-brand-pink text-white flex items-center justify-center border md:border-2 border-white shadow-md z-20 shrink-0">
-                    <span className="text-[8px] md:text-[10px] leading-none select-none">🤱</span>
-                  </div>
-                </div>
+             {/* LEFT SECTION: Hospital Logo Area */}
+<div
+  id="nav-logo"
+  onClick={() => {
+    onNavigate('overview');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }}
+  className="flex items-center gap-2.5 md:gap-3 cursor-pointer group select-none ml-1 md:ml-0 shrink-0"
+>
+  {/* Hospital Logo */}
+  <div className="shrink-0 flex items-center justify-center">
+    <img
+      src="/images/logo/hospital-logo.png"
+      alt="Mata Bhagyamani Devi Hospital"
+      className="w-[38px] h-[38px] md:w-12 md:h-12 object-contain rounded-xl shadow-md transition-transform duration-300 group-hover:scale-105"
+    />
+  </div>
 
-                <div className="flex flex-col text-left justify-center">
-                  <span className="text-13px xs:text-sm md:text-base font-black tracking-tight text-slate-950 uppercase font-heading leading-tight group-hover:text-brand-purple transition-colors duration-300">
-                    Mata Bhagyamani
-                  </span>
-                  <span className="text-[10px] xs:text-[11px] md:text-xs font-black text-brand-purple tracking-widest uppercase mt-0.5 leading-none">
-                    Devi Hospital
-                  </span>
-                  <span className="text-[7.5px] xs:text-[9px] font-extrabold text-slate-400 tracking-wider uppercase mt-0.5 leading-none">
-                    Care • Compassion • Trust
-                  </span>
-                  <span className="text-[8px] xs:text-[9px] text-emerald-600 font-bold mt-0.5 leading-none flex items-center gap-1">
-                    <span className="w-1 h-1 md:w-1.5 md:h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                    Kudra, Kaimur
-                  </span>
-                </div>
-              </div>
+  {/* Hospital Text */}
+  <div className="flex flex-col text-left justify-center">
+    <span className="text-13px xs:text-sm md:text-base font-black tracking-tight text-slate-950 uppercase font-heading leading-tight group-hover:text-brand-purple transition-colors duration-300">
+      Mata Bhagyamani
+    </span>
 
+    <span className="text-[10px] xs:text-[11px] md:text-xs font-black text-brand-purple tracking-widest uppercase mt-0.5 leading-none">
+      Devi Hospital
+    </span>
+
+    <span className="text-[7.5px] xs:text-[9px] font-extrabold text-slate-400 tracking-wider uppercase mt-0.5 leading-none">
+      Care • Compassion • Trust
+    </span>
+
+    <span className="text-[8px] xs:text-[9px] text-emerald-600 font-bold mt-0.5 leading-none flex items-center gap-1">
+      <span className="w-1 h-1 md:w-1.5 md:h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+      Kudra, Kaimur
+    </span>
+  </div>
+</div>
               {/* CENTER SECTION: Navigation Array */}
               <div className="hidden lg:flex min-w-0 flex-1 items-center justify-center gap-1 xl:gap-1.5 px-1.5 xl:px-2 py-1.5 rounded-full bg-slate-100/60 border border-slate-200/40 mx-2 xl:mx-3 max-w-[620px] xl:max-w-[700px] 2xl:max-w-[760px]">
                 {navItems.map((item, idx) => {
@@ -328,16 +319,10 @@ export default function Header({ onNavigate, activeSection }: HeaderProps) {
                   </motion.span>
                 </motion.button>
 
-                {/* Government Trust Badge (Cashless Available / Ayushman Bharat CTA) */}
-                <motion.button
-                  whileHover={{ y: -1.5 }}
-                  whileTap={{ scale: 0.98 }}
-                  onClick={() => onNavigate('ayushman')}
-                  className="hidden xl:flex shrink-0 items-center gap-2 px-2.5 xl:px-3 py-1.5 rounded-2xl bg-gradient-to-br from-teal-55 to-emerald-50/10 border border-teal-250 text-teal-800 text-[10px] font-black uppercase tracking-[0.08em] transition-all cursor-pointer shadow-sm text-left whitespace-nowrap"
-                >
-                  <Award className="w-4 h-4 text-teal-600 flex-shrink-0 animate-pulse" />
-                  <span>Ayushman Bharat</span>
-                </motion.button>
+                {/* Government Trust Badge (Cashless Available / Language Switcher) */}
+                <div className="hidden xl:flex shrink-0">
+                  <LanguageSwitcher variant="desktop" />
+                </div>
 
                 {/* Mobile Menu Icon Toggle */}
                 <button 
@@ -434,6 +419,11 @@ export default function Header({ onNavigate, activeSection }: HeaderProps) {
 
               {/* Bottom Row: Large Tactile Assistance Callouts (min-height 48px) */}
               <div className="flex flex-col gap-2.5 pt-4 border-t border-slate-100">
+                {/* 0. Language Switcher */}
+                <div className="w-full">
+                  <LanguageSwitcher variant="mobile" />
+                </div>
+
                 {/* 1. Admissions Quick Anchor Button */}
                 <button
                   onClick={() => {

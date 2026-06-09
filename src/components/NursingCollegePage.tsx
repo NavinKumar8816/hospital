@@ -1,45 +1,41 @@
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
-import EcosystemConnector from './EcosystemConnector';
-import { AdmissionsOverview, AdmissionProcess, TestimonialsSection } from './college/AdmissionsJourney';
-import { 
-  GraduationCap, 
-  BookOpen, 
-  Stethoscope, 
-  Award, 
-  School, 
-  Users, 
-  Activity, 
-  Building, 
-  ClipboardCheck, 
-  Download, 
-  PhoneCall, 
-  ArrowRight, 
-  CheckCircle2, 
-  Sparkles, 
-  BookOpenCheck,
-  Building2,
-  FileText,
-  Clock,
-  PlayCircle,
-  HeartPulse,
-  BadgeAlert,
-  ChevronRight,
-  Send,
-  X,
-  Compass,
-  MapPin,
-  Check,
-  MessageCircle,
-  ChevronDown,
-  HelpCircle,
-  FileSpreadsheet,
+import {
+  Activity,
   ArrowLeft,
+  ArrowRight,
+  Award,
+  Award as AwardIcon,
+  BookOpen,
+  BookOpenCheck,
   Briefcase,
+  Building,
+  Building2,
+  Check,
+  CheckCircle2,
+  ChevronDown,
+  ClipboardCheck,
+  Clock,
+  Compass,
+  Download,
+  GraduationCap,
+  HeartPulse,
+  HelpCircle,
+  MapPin,
   Menu,
+  MessageCircle,
+  PhoneCall,
+  PlayCircle,
+  School,
+  Send,
   ShieldCheck,
-  Award as AwardIcon
+  Sparkles,
+  Stethoscope,
+  Users,
+  X
 } from 'lucide-react';
+import { AnimatePresence, motion } from 'motion/react';
+import React, { useEffect, useState } from 'react';
+import EcosystemConnector from './EcosystemConnector';
+import { AdmissionProcess, AdmissionsOverview, TestimonialsSection } from './college/AdmissionsJourney';
 
 interface CollegePageProps {
   onBackToHospital: () => void;
@@ -275,7 +271,7 @@ export default function NursingCollegePage({ onBackToHospital }: CollegePageProp
       title: 'Hospital-Based Clinical Training',
       desc: 'Practical learning and clinical exposure through Mata Bhagyamani Devi Hospital.',
       icon: Activity,
-      stat: '150-Bed Partner Hospital',
+      stat: '100-Bed Partner Hospital',
       image: 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&q=80&w=800',
       badge: '🏥 Real Patient Exposure'
     },
@@ -417,7 +413,7 @@ export default function NursingCollegePage({ onBackToHospital }: CollegePageProp
     },
     {
       q: 'Do students receive real hospital-based bedside training?',
-      a: 'Yes! Bedside hospital training represents the very core of our curriculum. All students go through comprehensive, proctored clinical rotations totaling over 1,500 clinical hours directly on the live bedsides of our adjacent, partner 150-bed Mata Bhagyamani Devi Hospital.'
+      a: 'Yes! Bedside hospital training represents the very core of our curriculum. All students go through comprehensive, proctored clinical rotations totaling over 1,500 clinical hours directly on the live bedsides of our adjacent, partner 100-bed Mata Bhagyamani Devi Hospital.'
     },
     {
       q: 'Is Ramdhari Singh Memorial Nursing College affiliated and approved?',
@@ -426,7 +422,7 @@ export default function NursingCollegePage({ onBackToHospital }: CollegePageProp
   ];
 
   return (
-    <div id="premium-college-portal" className="min-h-screen bg-slate-50 relative flex flex-col font-sans selection:bg-purple-150 text-slate-800">
+    <div id="premium-college-portal" className="min-h-screen bg-slate-50 relative flex flex-col font-sans selection:bg-purple-100 text-slate-800">
       
       {/* Dynamic Grid Pattern Background */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#e2e8f080_1px,transparent_1px),linear-gradient(to_bottom,#e2e8f080_1px,transparent_1px)] bg-[size:2rem_2rem] z-0 pointer-events-none" />
@@ -452,48 +448,40 @@ export default function NursingCollegePage({ onBackToHospital }: CollegePageProp
       <header 
         className={`sticky top-0 z-40 w-full transition-all duration-300 ease-in-out border-b ${
           isScrolled 
-            ? 'py-2 bg-white/85 backdrop-blur-xl border-slate-200/90 shadow-md' 
-            : 'py-3 bg-white/95 backdrop-blur-md border-slate-100 shadow-none'
+            ? 'py-1 bg-white/85 backdrop-blur-xl border-slate-200/90 shadow-md' 
+            : 'py-2 bg-white/95 backdrop-blur-md border-slate-100 shadow-none'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 md:px-8 flex items-center justify-between gap-4">
           
           {/* Left Wing Brand */}
-          <div 
+          <div
             onClick={() => {
               window.scrollTo({ top: 0, behavior: 'smooth' });
               setActiveTab('academic-hero');
-            }} 
-            className="flex items-center gap-3 cursor-pointer group"
+            }}
+            className="flex items-center gap-2 cursor-pointer group shrink-0"
           >
-            {/* Logo: Graduation Cap + Medical Cross + Nursing Symbol */}
-            <div className="relative flex items-center justify-center w-11 h-11 rounded-xl bg-gradient-to-tr from-slate-950 via-indigo-950 to-indigo-900 border border-indigo-505/20 shadow-md group-hover:scale-105 transition-transform duration-300 select-none">
-              <div className="absolute inset-0 rounded-xl bg-indigo-500/5 blur-[2px]" />
-              <div className="relative z-10 grid grid-cols-2 gap-0.5 p-1 items-center justify-center">
-                <GraduationCap className="w-4 h-4 text-pink-400" />
-                <HeartPulse className="w-4 h-4 text-rose-500" />
-                <div className="col-span-2 flex justify-center items-center -mt-0.5">
-                  <div className="relative w-3.5 h-3.5 flex items-center justify-center bg-white rounded-md shadow-sm">
-                    <div className="absolute w-2.2 h-0.5 bg-emerald-500" />
-                    <div className="absolute h-2.2 w-0.5 bg-emerald-500" />
-                  </div>
-                </div>
-              </div>
+            <div className="h-14 w-14 md:h-16 md:w-16 rounded-xl bg-white border border-indigo-100 shadow-sm flex items-center justify-center overflow-hidden shrink-0 self-center">
+              <img
+                src="/images/logo/college-logo.png"
+                alt="Ramdhari Singh Memorial Nursing College"
+                className="h-full w-full object-contain object-center p-0 transition-transform duration-300 group-hover:scale-105"
+              />
             </div>
 
-            <div className="text-left">
-              <span className="text-[9px] tracking-[0.15em] font-black uppercase bg-gradient-to-r from-pink-500 via-purple-600 to-indigo-600 bg-clip-text text-transparent block">
-                RAMDHARI SINGH MEMORIAL
+            <div className="text-left leading-none min-w-0">
+              <span className="block text-[8.5px] md:text-[9px] tracking-[0.15em] font-black uppercase bg-gradient-to-r from-pink-500 via-purple-600 to-indigo-600 bg-clip-text text-transparent whitespace-nowrap">
+                Ramdhari Singh Memorial
               </span>
-              <span className="block text-sm font-black text-slate-900 font-heading leading-tight uppercase">
+              <span className="block text-sm md:text-base font-black text-slate-900 font-heading leading-tight uppercase whitespace-nowrap">
                 Nursing College
               </span>
-              <span className="text-[9.2px] text-slate-500 font-bold block leading-none mt-0.5 tracking-tight">
-                🎓 Building Future Healthcare Professionals
+              <span className="block text-[8.5px] md:text-[9.2px] text-slate-500 font-bold mt-1 tracking-tight whitespace-nowrap">
+                Building Future Healthcare Professionals
               </span>
             </div>
           </div>
-
           {/* Center Navigation */}
           <nav className="hidden lg:flex items-center gap-1 bg-slate-100/60 p-1 rounded-full border border-slate-200/50 relative">
             
@@ -1254,7 +1242,7 @@ export default function NursingCollegePage({ onBackToHospital }: CollegePageProp
                   color: "emerald"
                 },
                 {
-                  title: "Associated 150-Bed Hospital",
+                  title: "Associated 100-Bed Hospital",
                   desc: "Unmatched direct practical training inside active trauma, ICU, and maternal operation rooms.",
                   icon: Building,
                   color: "purple"
@@ -1502,7 +1490,7 @@ export default function NursingCollegePage({ onBackToHospital }: CollegePageProp
                 transition={{ delay: 0.2 }}
                 className="text-slate-500 text-sm md:text-base leading-relaxed max-w-2xl mx-auto font-medium"
               >
-                To learn nursing, one must help real patients. Our campus is connected directly to Mata Bhagyamani Devi Hospital—a functioning 150-bed tertiary care hospital. Students don't practice inside sterile sandboxes; they experience authentic medical emergencies, live surgery preps, and nurse-led ward rounds.
+                To learn nursing, one must help real patients. Our campus is connected directly to Mata Bhagyamani Devi Hospital—a functioning d tertiary care hospital. Students don't practice inside sterile sandboxes; they experience authentic medical emergencies, live surgery preps, and nurse-led ward rounds.
               </motion.p>
             </div>
 
@@ -1524,7 +1512,7 @@ export default function NursingCollegePage({ onBackToHospital }: CollegePageProp
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
                 {[
                   {
-                    label: "150 Proctored Bed Wards",
+                    label: "100 Proctored Bed Wards",
                     desc: "Complete operational wards covering OBG, Cardiology, Critical Care, and General Triage."
                   },
                   {
@@ -2069,7 +2057,7 @@ export default function NursingCollegePage({ onBackToHospital }: CollegePageProp
                   <div className="relative w-56 h-56 sm:w-64 sm:h-64 rounded-full overflow-hidden p-2.5 bg-gradient-to-tr from-amber-205 via-indigo-200 to-indigo-700 shadow-xl border border-white">
                     <div className="w-full h-full rounded-full overflow-hidden bg-slate-50 border border-slate-100">
                       <img 
-                        src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&q=80&w=500" 
+                        src="/public/images/srijayendraprasadsingh1.png" 
                         alt="Shri Jayendra Prasad Singh"
                         referrerPolicy="no-referrer"
                         className="w-full h-full object-cover transition-transform duration-700 hover:scale-103"
@@ -2238,7 +2226,7 @@ export default function NursingCollegePage({ onBackToHospital }: CollegePageProp
                   <div className="relative">
                     <span className="absolute -top-6 -left-4 text-7xl text-slate-100 font-serif select-none pointer-events-none select-none">“</span>
                     <p className="italic text-slate-650 text-xs sm:text-sm md:text-base leading-relaxed relative z-10 font-medium">
-                      "At Ramdhari Singh Memorial College, we refuse to treat nursing as a simple course of textbook definitions. A nurse is a patient's ultimate guardian and a surgeon's secondary eyes. By attaching our certified academic college to an active 150-bed tertiary care hospital, we force our student trainees to work on real, live proctored bedsides. We cultivate strict discipline, deep surgical ethics, and absolute clinical competence, ensuring the daughters of Kaimur rise to high-paying careers in reputable medical setups."
+                      "At Ramdhari Singh Memorial College, we refuse to treat nursing as a simple course of textbook definitions. A nurse is a patient's ultimate guardian and a surgeon's secondary eyes. By attaching our certified academic college to an active 100-bed tertiary care hospital, we force our student trainees to work on real, live proctored bedsides. We cultivate strict discipline, deep surgical ethics, and absolute clinical competence, ensuring the daughters of Kaimur rise to high-paying careers in reputable medical setups."
                     </p>
                   </div>
 
@@ -2328,14 +2316,14 @@ export default function NursingCollegePage({ onBackToHospital }: CollegePageProp
                   },
                   {
                     id: 'pushpa',
-                    name: 'Mrs. Pushpa Singh',
+                    name: 'Mr. Abhishek Anand',
                     title: 'Vice Principal & Head (OBG Nursing)',
                     category: 'leadership',
-                    credentials: 'M.Sc Nursing (Obstetrics & Gynecology) • 14+ Yrs Exp',
+                    credentials: 'B.Sc nursing (Obstetrics & Gynecology) • 10+ Yrs Exp',
                     specialties: 'Maternal Operative Care, Infant Resuscitation',
                     tag: 'Vice Principal',
                     bio: 'Providing critical obstetric and delivery care simulation guidance directly in active labor wards.',
-                    image: 'https://images.unsplash.com/photo-1567532939604-b6b5b0db2604?auto=format&fit=crop&q=80&w=400'
+                    image: 'public/images/viceprincipal1.png'
                   },
                   {
                     id: 'mary',
@@ -2725,7 +2713,7 @@ export default function NursingCollegePage({ onBackToHospital }: CollegePageProp
                         title: "Real Patient Clinical Exposure at MBD Hospital",
                         badge: "Advanced Internship Phase",
                         badgeColor: "bg-pink-50 border-pink-200 text-pink-850",
-                        description: "Trainees transition to the clinical floors of adjacent 150-bed Mata Bhagyamani Devi Hospital. Directly participating in surgical prep rounds, obstetrics wards, emergency triage boards, and monitoring real patient files.",
+                        description: "Trainees transition to the clinical floors of adjacent 100-bed Mata Bhagyamani Devi Hospital. Directly participating in surgical prep rounds, obstetrics wards, emergency triage boards, and monitoring real patient files.",
                         duration: "Year 2 to Year 3 Focus",
                         skills: ["Bedside Wound Irrigation", "Pre/Post-Operative Assisting", "Obstetrics Delivery Room support", "Physician Care Plan Implementation"],
                         parentAssurance: "✓ Direct Supervision: Students are closely proctored by senior registered clinical instructors. Zero unattended risks."
@@ -2893,7 +2881,7 @@ export default function NursingCollegePage({ onBackToHospital }: CollegePageProp
                     </div>
                   </div>
                   <div className="pt-4 mt-6 border-t border-slate-100 flex items-center justify-between text-[10px] font-black text-pink-700 font-mono">
-                    <span>150-BED TERTIARY HOSPITAL</span>
+                    <span>100-BED TERTIARY HOSPITAL</span>
                     <span>✓ 1500+ HOURS</span>
                   </div>
                 </motion.div>
@@ -3730,7 +3718,7 @@ export default function NursingCollegePage({ onBackToHospital }: CollegePageProp
 
                     <div className="flex items-center justify-between gap-4 pt-2">
                       <span className="text-[9px] text-[#db2777] font-extrabold uppercase tracking-wide">
-                        ★ attached with 150-bed hospital
+                        ★ attached with 100-bed hospital
                       </span>
 
                       <button
@@ -3916,7 +3904,7 @@ export default function NursingCollegePage({ onBackToHospital }: CollegePageProp
                 Visit Mata Bhagyamani Hospital
               </h4>
               <p className="text-[11px] leading-relaxed text-slate-500 font-medium">
-                Switch instantly to our main 150-bed multi-speciality tertiary care medical facility portal. Access OPD schedules, book consult tokens, and explore critical emergency medicine wings.
+                Switch instantly to our main 100-bed multi-speciality tertiary care medical facility portal. Access OPD schedules, book consult tokens, and explore critical emergency medicine wings.
               </p>
             </div>
 
@@ -3924,7 +3912,7 @@ export default function NursingCollegePage({ onBackToHospital }: CollegePageProp
             <div className="grid grid-cols-2 gap-2 mb-4 bg-slate-50 border border-slate-100 p-2.5 rounded-xl">
               <div className="text-left">
                 <span className="text-[9px] font-bold text-slate-400 block uppercase leading-none font-mono">CAPABILITY</span>
-                <span className="text-xs font-extrabold text-indigo-950">150 Beds Active</span>
+                <span className="text-xs font-extrabold text-indigo-950">100 Beds Active</span>
               </div>
               <div className="text-left border-l border-slate-200 pl-2">
                 <span className="text-[9px] font-bold text-slate-400 block uppercase leading-none font-mono">OPD CLINICS</span>

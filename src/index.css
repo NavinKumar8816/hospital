@@ -61,6 +61,15 @@ body {
   overflow-x: hidden;
 }
 
+.language-fade-shell {
+  transition: opacity 220ms ease, filter 220ms ease;
+}
+
+.language-fade-shell.is-switching-language {
+  opacity: 0.35;
+  filter: blur(1px);
+}
+
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
 }

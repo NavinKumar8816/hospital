@@ -1,28 +1,27 @@
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
-import { 
-  Phone, 
-  MessageSquare, 
-  Calendar, 
-  Check, 
-  ArrowRight, 
-  Sparkles, 
-  Heart, 
-  Plus, 
-  Stethoscope, 
-  Activity, 
-  Clock, 
-  Award, 
-  ShieldAlert,
-  UserCheck,
-  GraduationCap
+import {
+    Activity,
+    ArrowRight,
+    Award,
+    Calendar,
+    Clock,
+    GraduationCap,
+    Heart,
+    MessageSquare,
+    Phone,
+    ShieldAlert,
+    Sparkles,
+    Stethoscope
 } from 'lucide-react';
+import { motion } from 'motion/react';
+import { memo, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface HeroProps {
   onNavigate: (sectionId: string) => void;
 }
 
-export default function Hero({ onNavigate }: HeroProps) {
+function HeroComponent({ onNavigate }: HeroProps) {
+  const { t } = useTranslation();
   const [livePulse, setLivePulse] = useState(true);
 
   // Gentle pulsing live indicator
@@ -233,7 +232,7 @@ export default function Hero({ onNavigate }: HeroProps) {
               <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-100 shadow-sm">
                 <Sparkles className="w-3.5 h-3.5 text-blue-600 animate-pulse" />
                 <span className="text-[10px] md:text-xs font-black uppercase tracking-widest text-blue-900 font-sans">
-                  Trusted Healthcare Partner
+                  {t('hero.badge')}
                 </span>
               </span>
             </div>
@@ -241,10 +240,10 @@ export default function Hero({ onNavigate }: HeroProps) {
             {/* Heading Statement */}
             <div className="space-y-3">
               <h1 className="text-[clamp(2.4rem,7vw,3.2rem)] md:text-[clamp(3rem,4vw,4.5rem)] lg:text-[clamp(4rem,5vw,6rem)] font-black text-slate-950 tracking-tight font-sans leading-tight relative">
-                Mata Bhagyamani <br />
+                {t('hero.titleLine1')} <br />
                 <span className="relative inline-flex items-center">
                   <span className="bg-gradient-to-r from-[#1e40af] via-[#7c3aed] to-[#db2777] bg-clip-text text-transparent">
-                    Devi Hospital
+                    {t('hero.titleLine2')}
                   </span>
                   
                   {/* Premium Brand-Integrated ECG Line Launcher */}
@@ -307,13 +306,13 @@ export default function Hero({ onNavigate }: HeroProps) {
               
               {/* Elegant Subheading */}
               <h2 className="text-[18px] xs:text-[20px] sm:text-lg md:text-xl font-bold uppercase tracking-widest text-[#7c3aed] font-sans">
-                Multi-Speciality Hospital & Trauma Center
+                {t('hero.subtitle')}
               </h2>
             </div>
 
             {/* Patient Centered Emotionally Connecting Description */}
             <p className="text-slate-650 text-[15px] sm:text-[16px] md:text-base leading-relaxed max-w-xl font-medium">
-              Advanced emergency care, trauma services, women’s health, child healthcare, diagnostics and Ayushman Bharat support under one roof. We combine clinical excellence with motherly compassion to make every family feel completely secure.
+              {t('hero.description')}
             </p>
 
             {/* Call To Action Interaction Deck */}
@@ -329,7 +328,7 @@ export default function Hero({ onNavigate }: HeroProps) {
                   className="w-full sm:w-auto min-h-[48px] px-6 py-3.5 rounded-2xl bg-gradient-to-r from-blue-700 to-indigo-600 text-white font-black text-xs uppercase tracking-widest hover:shadow-lg hover:shadow-blue-500/15 transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer shadow-md"
                 >
                   <Calendar className="w-4 h-4" />
-                  <span>Book Appointment</span>
+                  <span>{t('common.bookAppointment')}</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </motion.button>
 
@@ -341,7 +340,7 @@ export default function Hero({ onNavigate }: HeroProps) {
                   className="w-full sm:w-auto min-h-[48px] px-6 py-3.5 rounded-2xl bg-white hover:bg-rose-50 border-2 border-rose-250 hover:border-rose-405 text-rose-600 font-extrabold text-xs uppercase tracking-widest transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer shadow-sm"
                 >
                   <Phone className="w-4 h-4 text-rose-500 animate-pulse" />
-                  <span>Emergency Call</span>
+                  <span>{t('common.emergencyCall')}</span>
                 </motion.a>
 
                 {/* TERTIARY: WhatsApp desk */}
@@ -354,7 +353,7 @@ export default function Hero({ onNavigate }: HeroProps) {
                   className="w-full sm:w-auto min-h-[48px] px-6 py-3.5 rounded-2xl bg-white hover:bg-emerald-50 border border-emerald-250 hover:border-emerald-450 text-emerald-700 font-extrabold text-xs uppercase tracking-widest transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer shadow-sm"
                 >
                   <MessageSquare className="w-4 h-4 text-emerald-500" />
-                  <span>WhatsApp Consult</span>
+                  <span>{t('hero.whatsAppConsult')}</span>
                 </motion.a>
               </div>
 
@@ -380,14 +379,14 @@ export default function Hero({ onNavigate }: HeroProps) {
                   <div className="flex flex-col text-left leading-tight">
                     <div className="flex items-center gap-1.5 flex-wrap">
                       <span className="text-[12.5px] sm:text-[13px] font-black uppercase tracking-widest text-white leading-none">
-                        Explore Nursing College
+                        {t('hero.exploreCollege')}
                       </span>
                       <span className="inline-flex items-center py-0.5 px-2 bg-amber-400 text-slate-950 text-[8.5px] font-black uppercase tracking-wider rounded-full shadow-sm animate-pulse shrink-0">
-                        Admissions Open
+                        {t('hero.admissionsOpen')}
                       </span>
                     </div>
                     <span className="text-[10px] sm:text-[9.5px] text-fuchsia-100 font-bold tracking-wide mt-1.5 whitespace-nowrap">
-                      Hospital Attached Training • 100% Placements
+                      {t('hero.collegePromise')}
                     </span>
                   </div>
                 </div>
@@ -404,22 +403,22 @@ export default function Hero({ onNavigate }: HeroProps) {
               
               <div className="flex flex-col text-left">
                 <span className="text-xl md:text-2xl font-black text-rose-600 font-sans leading-none">24×7</span>
-                <span className="text-[9px] text-slate-400 font-extrabold uppercase tracking-widest mt-1.5">Emergency</span>
+                <span className="text-[9px] text-slate-400 font-extrabold uppercase tracking-widest mt-1.5">{t('hero.emergency')}</span>
               </div>
 
               <div className="flex flex-col text-left border-l border-slate-200/80 pl-4">
                 <span className="text-xl md:text-2xl font-black text-blue-800 font-sans leading-none">15+</span>
-                <span className="text-[9px] text-slate-400 font-extrabold uppercase tracking-widest mt-1.5">Specialities</span>
+                <span className="text-[9px] text-slate-400 font-extrabold uppercase tracking-widest mt-1.5">{t('hero.specialities')}</span>
               </div>
 
               <div className="flex flex-col text-left border-l border-slate-200/80 pl-4">
                 <span className="text-xl md:text-2xl font-black text-[#7c3aed] font-sans leading-none">ICU•NICU</span>
-                <span className="text-[9px] text-slate-400 font-extrabold uppercase tracking-widest mt-1.5">Clinical Beds</span>
+                <span className="text-[9px] text-slate-400 font-extrabold uppercase tracking-widest mt-1.5">{t('hero.clinicalBeds')}</span>
               </div>
 
               <div className="flex flex-col text-left border-l border-slate-200/80 pl-4">
                 <span className="text-xl md:text-2xl font-black text-emerald-600 font-sans leading-none">100%</span>
-                <span className="text-[9px] text-slate-400 font-extrabold uppercase tracking-widest mt-1.5">Ayushman Treatment</span>
+                <span className="text-[9px] text-slate-400 font-extrabold uppercase tracking-widest mt-1.5">{t('hero.ayushmanTreatment')}</span>
               </div>
 
             </div>
@@ -468,8 +467,8 @@ export default function Hero({ onNavigate }: HeroProps) {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-rose-950/45 via-transparent to-transparent" />
                 <div className="absolute bottom-4 left-4 text-left">
-                  <span className="block text-[8px] font-mono tracking-widest text-[#ffe4e6] uppercase font-bold animate-pulse">Mother & Child</span>
-                  <p className="text-[11px] font-black text-white leading-tight">Neonatal Wards Care</p>
+                  <span className="block text-[8px] font-mono tracking-widest text-[#ffe4e6] uppercase font-bold animate-pulse">{t('hero.motherChild')}</span>
+                  <p className="text-[11px] font-black text-white leading-tight">{t('hero.neonatalWards')}</p>
                 </div>
               </motion.div>
 
@@ -501,8 +500,8 @@ export default function Hero({ onNavigate }: HeroProps) {
                   <ShieldAlert className="w-4 h-4" />
                 </div>
                 <div className="text-left leading-tight">
-                  <span className="block text-[8px] font-black text-rose-500 uppercase tracking-widest">Level 1 Trauma</span>
-                  <span className="text-[10px] font-bold text-slate-800">24×7 Emergency</span>
+                  <span className="block text-[8px] font-black text-rose-500 uppercase tracking-widest">{t('hero.levelTrauma')}</span>
+                  <span className="text-[10px] font-bold text-slate-800">24×7 {t('hero.emergency')}</span>
                 </div>
               </motion.div>
 
@@ -517,8 +516,8 @@ export default function Hero({ onNavigate }: HeroProps) {
                   <Activity className="w-4 h-4" />
                 </div>
                 <div className="text-left leading-tight">
-                  <span className="block text-[8px] font-black text-blue-600 uppercase tracking-widest">Critical care</span>
-                  <span className="text-[10px] font-bold text-slate-800">ICU / NICU Equipped</span>
+                  <span className="block text-[8px] font-black text-blue-600 uppercase tracking-widest">{t('hero.criticalCare')}</span>
+                  <span className="text-[10px] font-bold text-slate-800">{t('hero.icuNicuEquipped')}</span>
                 </div>
               </motion.div>
 
@@ -533,8 +532,8 @@ export default function Hero({ onNavigate }: HeroProps) {
                   <Award className="w-4 h-4" />
                 </div>
                 <div className="text-left leading-tight">
-                  <span className="block text-[8px] font-black text-teal-600 uppercase tracking-widest">Govt PM-JAY</span>
-                  <span className="text-[10px] font-bold text-slate-800 text-ellipsis break-all whitespace-nowrap">100% Cashless support</span>
+                  <span className="block text-[8px] font-black text-teal-600 uppercase tracking-widest">{t('hero.govtPmjay')}</span>
+                  <span className="text-[10px] font-bold text-slate-800 text-ellipsis break-all whitespace-nowrap">{t('hero.cashlessSupport')}</span>
                 </div>
               </motion.div>
 
@@ -549,8 +548,8 @@ export default function Hero({ onNavigate }: HeroProps) {
                   <Stethoscope className="w-4 h-4" />
                 </div>
                 <div className="text-left leading-tight">
-                  <span className="block text-[8px] font-black text-purple-600 uppercase tracking-widest">Clinical Depth</span>
-                  <span className="text-[10px] font-bold text-slate-800">15+ Specialities</span>
+                  <span className="block text-[8px] font-black text-purple-600 uppercase tracking-widest">{t('hero.clinicalDepth')}</span>
+                  <span className="text-[10px] font-bold text-slate-800">15+ {t('hero.specialities')}</span>
                 </div>
               </motion.div>
 
@@ -563,3 +562,7 @@ export default function Hero({ onNavigate }: HeroProps) {
     </section>
   );
 }
+
+const Hero = memo(HeroComponent);
+
+export default Hero;

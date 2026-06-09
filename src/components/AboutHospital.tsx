@@ -1,6 +1,4 @@
-import React from 'react';
-import { motion } from 'motion/react';
-import { Heart, ShieldCheck, Award, CheckCircle2, ChevronRight, Microscope } from 'lucide-react';
+import { Award, CheckCircle2, Heart, Microscope, ShieldCheck } from 'lucide-react';
 
 export default function AboutHospital() {
   return (
@@ -41,7 +39,7 @@ export default function AboutHospital() {
               {/* Mini Stats Overlapping overlay */}
               <div className="grid grid-cols-3 gap-3 p-4 bg-slate-50 border border-slate-100 rounded-2xl mt-3 text-center leading-none">
                 <div>
-                  <span className="text-xl font-extrabold text-[#0c4ea3]">150+</span>
+                  <span className="text-xl font-extrabold text-[#0c4ea3]">100+</span>
                   <span className="block text-[9px] font-bold text-slate-400 uppercase mt-1 leading-none">Operational Beds</span>
                 </div>
                 <div className="border-l border-slate-200 pl-1">
@@ -73,7 +71,7 @@ export default function AboutHospital() {
             </p>
 
             <p className="text-slate-650 text-xs md:text-sm leading-relaxed font-medium">
-              Our advanced clinical campus integrates a state-of-the-art 150-bed multi-speciality tertiary facility with dedicated emergency rooms, modular operation suites, intensive coronary care (ICCU), level-II sterile incubation systems (NICU), and professional 24/7 dispatch ambulances.
+              Our advanced clinical campus integrates a state-of-the-art 100-bed multi-speciality tertiary facility with dedicated emergency rooms, modular operation suites, intensive coronary care (ICCU), level-II sterile incubation systems (NICU), and professional 24/7 dispatch ambulances.
             </p>
 
             {/* Structured Bullet Rows */}

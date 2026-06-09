@@ -1,25 +1,11 @@
-import React from 'react';
-import { motion } from 'motion/react';
-import { 
-  Building2, 
-  GraduationCap, 
-  Check, 
-  ArrowRight, 
-  Activity, 
-  HeartPulse, 
-  Stethoscope, 
-  Award, 
-  School, 
-  Sparkles,
-  ChevronRight,
-  Shield,
-  Clock,
-  ArrowRightCircle,
-  ExternalLink,
-  Milestone,
-  MapPin,
-  ChevronDown
+import {
+  ArrowRight,
+  Building2,
+  Check,
+  GraduationCap,
+  Sparkles
 } from 'lucide-react';
+import { motion } from 'motion/react';
 
 interface EcosystemConnectorProps {
   onNavigateView?: (view: 'hospital' | 'college') => void;
@@ -154,7 +140,7 @@ export default function EcosystemConnector({ onNavigateView }: EcosystemConnecto
                     </h3>
                   </div>
                   <p className="text-slate-500 text-xs font-light leading-relaxed">
-                    A prominent 150-bed multi-speciality tertiary healthcare venue equipped with intensive medical units, expert clinical departments, and general beds.
+                    A prominent 100-bed multi-speciality tertiary healthcare venue equipped with intensive medical units, expert clinical departments, and general beds.
                   </p>
                 </div>
 
@@ -365,7 +351,7 @@ export default function EcosystemConnector({ onNavigateView }: EcosystemConnecto
                 Ramdhari Singh Memorial Nursing College <span className="text-slate-350 font-normal">in association with</span> Mata Bhagyamani Devi Hospital
               </p>
               <p className="text-[#c7d2fe] text-xs sm:text-sm font-light leading-relaxed">
-                Students gain practical knowledge through intense bedside exposure inside the fully active pathology, obstetric wards, and clinical surgical blocks of our attached 150-bed tertiary hospital setup.
+                Students gain practical knowledge through intense bedside exposure inside the fully active pathology, obstetric wards, and clinical surgical blocks of our attached 100-bed tertiary hospital setup.
               </p>
             </div>
 

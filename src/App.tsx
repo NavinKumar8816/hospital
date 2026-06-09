@@ -1,31 +1,34 @@
-import React, { Suspense, lazy, useEffect, useState } from 'react';
+import { AnimatePresence, motion } from 'motion/react';
+import { Suspense, lazy, useCallback, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import AboutHospital from './components/AboutHospital';
+import AppointmentPortal from './components/AppointmentPortal';
+import AyushmanBharat from './components/AyushmanBharat';
+import ContactLocation from './components/ContactLocation';
+import CuratedLanguageLocalizer from './components/CuratedLanguageLocalizer';
+import DoctorsList from './components/DoctorsList';
+import EmergencyWidget from './components/EmergencyWidget';
+import Footer from './components/Footer';
+import GallerySection from './components/GallerySection';
 import Header from './components/Header';
 import Hero from './components/Hero';
-import AboutHospital from './components/AboutHospital';
-import WhyTrustUs from './components/WhyTrustUs';
-import DoctorsList from './components/DoctorsList';
+import HospitalFAQ from './components/HospitalFAQ';
+import SEOMetadata from './components/SEOMetadata';
 import ServicesGrid from './components/ServicesGrid';
+import StickyBottomEmergencyBar from './components/StickyBottomEmergencyBar';
+import Testimonials from './components/Testimonials';
 import TraumaSpecial from './components/TraumaSpecial';
 import TrustFacilities from './components/TrustFacilities';
-import AyushmanBharat from './components/AyushmanBharat';
-import NursingCollege from './components/NursingCollege';
-import Testimonials from './components/Testimonials';
-import GallerySection from './components/GallerySection';
-import AppointmentPortal from './components/AppointmentPortal';
-import ContactLocation from './components/ContactLocation';
-import Footer from './components/Footer';
-import EmergencyWidget from './components/EmergencyWidget';
-import StickyBottomEmergencyBar from './components/StickyBottomEmergencyBar';
-import SEOMetadata from './components/SEOMetadata';
-import HospitalFAQ from './components/HospitalFAQ';
-import { motion, AnimatePresence } from 'motion/react';
+import WhyTrustUs from './components/WhyTrustUs';
 
 const NursingCollegePage = lazy(() => import('./components/NursingCollegePage'));
 
 export default function App() {
+  const { t, i18n } = useTranslation();
   const [currentView, setCurrentView] = useState<'hospital' | 'college'>('hospital');
   const [activeSection, setActiveSection] = useState<string>('home');
   const [preselectedDoctor, setPreselectedDoctor] = useState<string>('');
+  const [isSwitchingLanguage, setIsSwitchingLanguage] = useState(false);
 
   // Dynamically synchronize the state with query search params & hash changes
   useEffect(() => {
@@ -47,6 +50,12 @@ export default function App() {
       window.removeEventListener('hashchange', handleUrlStateSync);
     };
   }, []);
+
+  useEffect(() => {
+    setIsSwitchingLanguage(true);
+    const timeout = window.setTimeout(() => setIsSwitchingLanguage(false), 240);
+    return () => window.clearTimeout(timeout);
+  }, [i18n.language]);
 
   // Professional Scroll Spy using Intersection Observer
   useEffect(() => {
@@ -104,7 +113,7 @@ export default function App() {
   }, [currentView]);
 
   // Set view helper with pushState to update browser address bar
-  const handleSetView = (view: 'hospital' | 'college') => {
+  const handleSetView = useCallback((view: 'hospital' | 'college') => {
     setCurrentView(view);
     const url = new URL(window.location.href);
     if (view === 'college') {
@@ -115,10 +124,10 @@ export default function App() {
     }
     window.history.pushState({}, '', url.toString());
     window.scrollTo({ top: 0, behavior: 'instant' });
-  };
+  }, []);
 
-  // Smooth-scroll navigational anchor connector
-  const handleNavigate = (sectionId: string) => {
+  // Smooth-scroll navigational anchor connector - memoized to prevent re-creation
+  const handleNavigate = useCallback((sectionId: string) => {
     if (sectionId === 'nursing-college-view' || sectionId === 'nursing-college') {
       handleSetView('college');
       return;
@@ -129,50 +138,61 @@ export default function App() {
       handleSetView('hospital');
       // Delay navigation slightly so DOM updates and element is in layout tree
       setTimeout(() => {
-        scrollToElement(sectionId);
+        const element = document.getElementById(sectionId);
+        if (element) {
+          const offset = 135; 
+          const bodyRect = document.body.getBoundingClientRect().top;
+          const elementRect = element.getBoundingClientRect().top;
+          const elementPosition = elementRect - bodyRect;
+          const offsetPosition = elementPosition - offset;
+
+          setActiveSection(sectionId);
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+        }
       }, 120);
     } else {
-      scrollToElement(sectionId);
+      const element = document.getElementById(sectionId);
+      if (element) {
+        // Offset scroll location slightly to account for the sticky glass header
+        const offset = 135; 
+        const bodyRect = document.body.getBoundingClientRect().top;
+        const elementRect = element.getBoundingClientRect().top;
+        const elementPosition = elementRect - bodyRect;
+        const offsetPosition = elementPosition - offset;
+
+        setActiveSection(sectionId);
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+      }
     }
-  };
+  }, [currentView, handleSetView]);
 
-  const scrollToElement = (sectionId: string) => {
-    setActiveSection(sectionId);
-    const element = document.getElementById(sectionId);
-    if (element) {
-      // Offset scroll location slightly to account for the sticky glass header
-      const offset = 135; 
-      const bodyRect = document.body.getBoundingClientRect().top;
-      const elementRect = element.getBoundingClientRect().top;
-      const elementPosition = elementRect - bodyRect;
-      const offsetPosition = elementPosition - offset;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
-    }
-  };
-
-  // Wire physician selection click into the scheduler 
-  const handleSelectDoctor = (doctorName: string) => {
+  // Wire physician selection click into the scheduler - memoized
+  const handleSelectDoctor = useCallback((doctorName: string) => {
     setPreselectedDoctor(doctorName);
     // Smooth scroll straight down to priority appointments
     handleNavigate('appointment');
-  };
+  }, [handleNavigate]);
 
-  const handleClearPreselect = () => {
+  const handleClearPreselect = useCallback(() => {
     setPreselectedDoctor('');
-  };
+  }, []);
 
   return (
     <>
       <SEOMetadata view={currentView} />
+      <div className={`language-fade-shell ${isSwitchingLanguage ? 'is-switching-language' : ''}`}>
+      <CuratedLanguageLocalizer />
       <Suspense
         fallback={
           <div className="min-h-screen luxury-gradient flex items-center justify-center px-4">
             <div className="rounded-3xl border border-white/40 bg-white/80 px-6 py-4 text-center shadow-lg backdrop-blur-md">
-              <p className="text-sm font-bold uppercase tracking-[0.2em] text-slate-500">Loading Experience</p>
+              <p className="text-sm font-bold uppercase tracking-[0.2em] text-slate-500">{t('common.loading')}</p>
             </div>
           </div>
         }
@@ -254,10 +274,10 @@ export default function App() {
                       <span className="text-xl">🎓</span>
                     </div>
                     <div>
-                      <span className="text-[10px] text-purple-600 font-extrabold uppercase tracking-widest block mb-0.5">Academic Wing Affiliate</span>
-                      <h4 className="text-base sm:text-lg font-black text-slate-900 leading-tight">Ramdhari Singh Memorial School & College of Nursing</h4>
+                      <span className="text-[10px] text-purple-600 font-extrabold uppercase tracking-widest block mb-0.5">{t('hospital.academicWing')}</span>
+                      <h4 className="text-base sm:text-lg font-black text-slate-900 leading-tight">{t('hospital.collegeName')}</h4>
                       <p className="text-xs text-slate-500 mt-1 leading-relaxed">
-                        Accredited GNM, B.Sc. Nursing & Paramedical pathways with direct hospital bedside clinical rotation.
+                        {t('hospital.collegeShort')}
                       </p>
                     </div>
                   </div>
@@ -267,7 +287,7 @@ export default function App() {
                     onClick={() => handleNavigate('nursing-college')}
                     className="w-full md:w-auto px-5 py-3 rounded-xl bg-gradient-to-r from-[#4d3091] to-[#702082] hover:shadow-lg transition-all text-white font-extrabold text-xs uppercase tracking-wider shrink-0 cursor-pointer text-center"
                   >
-                    Visit College Website
+                    {t('common.visitCollegeWebsite')}
                   </motion.button>
                 </div>
               </div>
@@ -290,6 +310,7 @@ export default function App() {
         )}
         </AnimatePresence>
       </Suspense>
+      </div>
     </>
   );
 }

@@ -1,23 +1,15 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
-import { 
-  Stethoscope, 
-  Clock, 
-  Award, 
-  Star, 
-  CheckCircle, 
-  ShieldCheck, 
-  User, 
-  Calendar, 
-  Heart, 
-  X, 
-  ChevronRight, 
-  Briefcase, 
-  Users, 
-  HeartPulse, 
-  Sparkles,
-  ShieldAlert
+import {
+  Award,
+  Calendar,
+  CheckCircle,
+  ChevronRight,
+  Clock,
+  Stethoscope,
+  X
 } from 'lucide-react';
+import { AnimatePresence, motion } from 'motion/react';
+import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { DOCTORS } from '../data';
 import { Doctor } from '../types';
 
@@ -26,12 +18,13 @@ interface DoctorsListProps {
 }
 
 export default function DoctorsList({ onSelectDoctor }: DoctorsListProps) {
+  const { t } = useTranslation();
   const [selectedDoctorProfile, setSelectedDoctorProfile] = useState<Doctor | null>(null);
 
   // Map doctors to curated professional photo URLs to provide real private hospital aesthetics
   const doctorPhotos: Record<string, string> = {
     'dr1': 'https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&q=80&w=600', // Sanjay Kumar
-    'dr2': 'https://images.unsplash.com/photo-1594824813573-246434de83fb?auto=format&fit=crop&q=80&w=600', // Rita Kumari
+    'dr2': 'public/images/doctor/DrRitaKumari.png', // Rita Kumari
     'dr3': 'https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&q=80&w=600', // Avadhesh Kumar
     'dr4': 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=600', // Brajesh Kumar
     'dr5': 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&q=80&w=600', // Mohit Sharan
@@ -51,10 +44,10 @@ export default function DoctorsList({ onSelectDoctor }: DoctorsListProps) {
   };
 
   const trustIndicators = [
-    { label: 'Experienced Doctors', desc: 'Board certified consultants & senior surgeons' },
-    { label: 'Multi-Speciality Team', desc: 'Cross-functional collaborative support network' },
-    { label: 'Emergency Support', desc: 'On-Call trauma response 24×7 without failure' },
-    { label: 'Patient-Centered Care', desc: 'Focused exclusively on continuous bedside comfort' }
+    { label: t('doctors.experiencedDoctors'), desc: t('doctors.experiencedDocsDesc') },
+    { label: t('doctors.multiSpeciality'), desc: t('doctors.multiSpecialityDesc') },
+    { label: t('doctors.emergencySupport'), desc: t('doctors.emergencySupportDesc') },
+    { label: t('doctors.patientCare'), desc: t('doctors.patientCareDesc') }
   ];
 
   return (
@@ -78,7 +71,7 @@ export default function DoctorsList({ onSelectDoctor }: DoctorsListProps) {
             className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-purple-light border border-brand-purple/15 text-xs text-brand-purple font-extrabold uppercase tracking-widest font-heading shadow-sm"
           >
             <Stethoscope className="w-3.5 h-3.5 text-brand-purple animate-pulse" />
-            <span>Senior Board of Specialists</span>
+            <span>{t('doctors.senior')}</span>
           </motion.div>
 
           <motion.h2 
@@ -88,7 +81,7 @@ export default function DoctorsList({ onSelectDoctor }: DoctorsListProps) {
             transition={{ delay: 0.1 }}
             className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-950 tracking-tight font-heading leading-tight"
           >
-            Meet Our Medical Experts
+            {t('doctors.title')}
           </motion.h2>
 
           <motion.p 
@@ -98,7 +91,7 @@ export default function DoctorsList({ onSelectDoctor }: DoctorsListProps) {
             transition={{ delay: 0.2 }}
             className="text-slate-650 text-sm md:text-base max-w-2xl mx-auto leading-relaxed font-light"
           >
-            Experienced specialists dedicated to providing compassionate and advanced healthcare services. All our clinicians are board-certified and active members of national trauma boards.
+            {t('doctors.description')}
           </motion.p>
         </div>
 
@@ -137,10 +130,10 @@ export default function DoctorsList({ onSelectDoctor }: DoctorsListProps) {
             
             // Status CSS parameters for clinical triage indicator bar
             const statusConfig = {
-              'Available Today': { label: 'Active in Clinic', styles: 'bg-emerald-50 text-emerald-700 border-emerald-200' },
-              'In Surgery': { label: 'In Operation Room', styles: 'bg-rose-50 text-rose-750 border-rose-200' },
-              'On Call': { label: 'Emergency Responder', styles: 'bg-indigo-50 text-indigo-750 border-indigo-200' },
-              'Next Available: Tomorrow': { label: 'Next Duty: Tomorrow', styles: 'bg-slate-50 text-slate-550 border-slate-200' }
+              'Available Today': { label: t('doctors.activeInClinic'), styles: 'bg-emerald-50 text-emerald-700 border-emerald-200' },
+              'In Surgery': { label: t('doctors.inOperationRoom'), styles: 'bg-rose-50 text-rose-750 border-rose-200' },
+              'On Call': { label: t('doctors.emergencyResponder'), styles: 'bg-indigo-50 text-indigo-750 border-indigo-200' },
+              'Next Available: Tomorrow': { label: t('doctors.nextDutyTomorrow'), styles: 'bg-slate-50 text-slate-550 border-slate-200' }
             }[doctor.status];
 
             return (
@@ -248,7 +241,7 @@ export default function DoctorsList({ onSelectDoctor }: DoctorsListProps) {
                     onClick={() => setSelectedDoctorProfile(doctor)}
                     className="flex-1 py-3 px-4 rounded-xl border border-slate-200 hover:border-brand-purple/20 bg-white hover:bg-slate-50 text-slate-700 hover:text-brand-purple text-[10px] font-extrabold uppercase tracking-wider transition-all duration-300 cursor-pointer text-center"
                   >
-                    View Profile
+                    {t('doctors.viewProfile')}
                   </button>
 
                   {/* Consultation selector trigger straight to booking forms */}
@@ -257,7 +250,7 @@ export default function DoctorsList({ onSelectDoctor }: DoctorsListProps) {
                     className="flex-[1.4] py-3 px-4 rounded-xl bg-gradient-to-r from-medical-blue to-brand-purple text-white hover:shadow-md hover:shadow-brand-purple/15 text-[10px] font-extrabold uppercase tracking-wider transition-all duration-300 cursor-pointer flex items-center justify-center gap-1"
                   >
                     <Calendar className="w-3.5 h-3.5" />
-                    <span>Book Appointment</span>
+                    <span>{t('common.bookAppointment')}</span>
                   </button>
 
                 </div>

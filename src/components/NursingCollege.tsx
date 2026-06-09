@@ -1,18 +1,14 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
-import { 
-  GraduationCap, 
-  School, 
-  ArrowRight, 
-  HeartPulse, 
-  X, 
-  Calendar, 
-  FileText, 
-  CheckCircle, 
-  Phone,
-  Clock,
-  Sparkles
+import {
+  ArrowRight,
+  Calendar,
+  CheckCircle,
+  GraduationCap,
+  School,
+  Sparkles,
+  X
 } from 'lucide-react';
+import { AnimatePresence, motion } from 'motion/react';
+import React, { useState } from 'react';
 
 interface NursingCollegeProps {
   onNavigate: (sectionId: string) => void;
@@ -92,7 +88,7 @@ export default function NursingCollege({ onNavigate }: NursingCollegeProps) {
                       <span>Attached Hospital Bedside Practice</span>
                     </div>
                     <p className="text-white text-xs font-semibold leading-tight mt-0.5">
-                      1,500+ direct proctored medical rotation clinical hours inside 150-bed wards.
+                      1,500+ direct proctored medical rotation clinical hours inside 100-bed wards.
                     </p>
                   </div>
                 </div>
@@ -124,7 +120,7 @@ export default function NursingCollege({ onNavigate }: NursingCollegeProps) {
             <div className="space-y-2.5">
               {[
                 'Accredited community GNM & ANM certification pathways.',
-                'Direct bedside clinical rotations inside 150-bed wards.',
+                'Direct bedside clinical rotations inside 100-bed wards.',
                 'Immediate career placement across top state medical hubs.'
               ].map((item, key) => (
                 <div key={key} className="flex items-center gap-2 text-xs font-bold text-slate-800">

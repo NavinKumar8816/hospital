@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
-import { Image as ImageIcon, X, ZoomIn, Heart, Sparkles } from 'lucide-react';
+import { Image as ImageIcon, X, ZoomIn } from 'lucide-react';
+import { AnimatePresence, motion } from 'motion/react';
+import { useState } from 'react';
 
 interface GalleryPhoto {
   url: string;
@@ -96,7 +96,7 @@ export default function GallerySection() {
     {
       url: 'https://images.unsplash.com/photo-1586773860418-d37222d8fce2?auto=format&fit=crop&q=80&w=800',
       title: 'Disaster Resistant Medical Layout',
-      desc: 'Robust hospital structure planning providing extreme safety for over 150 beds.',
+      desc: 'Robust hospital structure planning providing extreme safety for over 100 beds.',
       category: 'infrastructure',
       heightClass: 'h-96'
     }
