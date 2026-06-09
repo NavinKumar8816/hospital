@@ -83,31 +83,62 @@ export default function AppointmentPortal({ preselectedDoctor, onClearPreselect 
     return Object.keys(tempErrors).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
     if (!validateForm()) return;
 
-    // Generate simulated Token MBD-YearMonthDay-SequentialNumber
-    const dateFormatted = formData.date.replace(/-/g, '').substring(2);
-    const randomNumber = Math.floor(Math.random() * 900) + 100;
-    const token = `MBD-${dateFormatted}-${randomNumber}`;
-    
-    // Generate estimated time wait
-    const waitTimes = ['10-15 Minutes', '15-20 Minutes', 'Zero Wait (Emergency Priority)', '20-30 Minutes'];
-    const randomWait = waitTimes[Math.floor(Math.random() * waitTimes.length)];
-
-    setSuccessToken(token);
-    setEstimatedWait(randomWait);
-
-    // Save locally for records
-    const sessionRecord = {
-      ...formData,
-      token,
-      timestamp: new Date().toISOString()
+    const formPayload = {
+      access_key: '786fe89c-4454-47cc-8577-eaba319cb326',
+      subject: 'New Appointment Request - MBD Hospital',
+      patientName: formData.patientName,
+      patientPhone: formData.patientPhone,
+      speciality: formData.speciality,
+      doctor: formData.doctor,
+      appointmentDate: formData.date,
+      timeSlot: formData.timeSlot,
+      symptoms: formData.symptoms,
+      ayushmanCard: formData.hasAyushman ? 'Yes' : 'No',
     };
-    const historical = JSON.parse(localStorage.getItem('mbd_appointments') || '[]');
-    historical.push(sessionRecord);
-    localStorage.setItem('mbd_appointments', JSON.stringify(historical));
+
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify(formPayload),
+      });
+
+      const result = await response.json();
+
+      if (!result.success) {
+        alert('Appointment request failed.');
+        return;
+      }
+
+      const dateFormatted = formData.date.replace(/-/g, '').substring(2);
+      const randomNumber = Math.floor(Math.random() * 900) + 100;
+      const token = `MBD-${dateFormatted}-${randomNumber}`;
+
+      setSuccessToken(token);
+      setEstimatedWait('10-15 Minutes');
+
+      const sessionRecord = {
+        ...formData,
+        token,
+        timestamp: new Date().toISOString()
+      };
+      const historical = JSON.parse(localStorage.getItem('mbd_appointments') || '[]');
+      historical.push(sessionRecord);
+      localStorage.setItem('mbd_appointments', JSON.stringify(historical));
+
+      alert('Appointment request submitted successfully!');
+    } catch (error) {
+      console.error(error);
+      alert('Something went wrong. Please try again.');
+    }
   };
 
   const handleBookAnother = () => {
