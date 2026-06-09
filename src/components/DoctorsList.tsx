@@ -24,7 +24,7 @@ export default function DoctorsList({ onSelectDoctor }: DoctorsListProps) {
   // Map doctors to curated professional photo URLs to provide real private hospital aesthetics
   const doctorPhotos: Record<string, string> = {
     'dr1': 'https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&q=80&w=600', // Sanjay Kumar
-    'dr2': 'public/images/doctor/DrRitaKumari.png', // Rita Kumari
+    'dr2': '/images/doctor/DrRitaKumari.png', // Rita Kumari
     'dr3': 'https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&q=80&w=600', // Avadhesh Kumar
     'dr4': 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=600', // Brajesh Kumar
     'dr5': 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&q=80&w=600', // Mohit Sharan
